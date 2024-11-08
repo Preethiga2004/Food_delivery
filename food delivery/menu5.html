@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kokkarako Restaurant Menu</title>
+    
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        background-color: rgba(250, 250, 250, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 1200px;
+        text-align: center;
+    }
+    h1 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap; /* Allows items to wrap if they overflow */
+        justify-content: space-around;
+    }
+    ul li {
+        width: 200px; /* Set a fixed width for each item */
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    ul li img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%; /* Make the image circular */
+        margin-bottom: 15px;
+    }
+    .order-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+    .order-controls button {
+        padding: 5px 10px;
+        font-size: 16px;
+    }
+    .order-controls input {
+        width: 40px;
+        text-align: center;
+        margin: 0 10px;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kokkarako Restaurant Menu</h1>
+        <ul>
+            <li>
+                <img src="https://thumbs.dreamstime.com/b/chicken-dum-biryani-white-bowl-traditional-indian-one-pot-dish-background-high-angle-view-156498926.jpg" alt="Biryani">
+                <div>
+                    <p><strong>Chicken Biryani</strong> - ₹250</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('biryani')">-</button>
+                    <input type="text" id="biryani-quantity" value="0" readonly>
+                    <button onclick="increment('biryani')">+</button>
+                </div>
+            </li>
+            <li>
+                <img src="https://www.shutterstock.com/image-photo/best-savory-paneer-butter-masala-260nw-2484399203.jpg" alt="Curry">
+                <div>
+                    <p><strong>Paneer Butter Masala</strong> - ₹220</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('paneer')">-</button>
+                    <input type="text" id="paneer-quantity" value="0" readonly>
+                    <button onclick="increment('paneer')">+</button>
+                </div>
+            </li>
+            <li>
+                <img src="https://www.vegrecipesofindia.com/wp-content/uploads/2022/12/garlic-naan-3.jpg" alt="Naan">
+                <div>
+                    <p><strong>Garlic Naan</strong> - ₹80</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('naan')">-</button>
+                    <input type="text" id="naan-quantity" value="0" readonly>
+                    <button onclick="increment('naan')">+</button>
+                </div>
+            </li>
+            <li>
+                <img src="https://media.istockphoto.com/id/502663991/photo/punjabi-samosa-23.jpg?s=612x612&w=0&k=20&c=Ne0ArOpa-4L2N-INtPnq371fFZoM6qWW6R4ryN9TWW0=" alt="Samosa">
+                <div>
+                    <p><strong>Samosa</strong> - ₹50</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('samosa')">-</button>
+                    <input type="text" id="samosa-quantity" value="0" readonly>
+                    <button onclick="increment('samosa')">+</button>
+                </div>
+            </li>
+            <li>
+                <img src="https://aartimadan.com/wp-content/uploads/2019/05/fALOODA-RECIPE-1.jpg" alt="Gulab Jamun">
+                <div>
+                    <p><strong>Falooda</strong> - ₹60</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('gulab')">-</button>
+                    <input type="text" id="gulab-quantity" value="0" readonly>
+                    <button onclick="increment('gulab')">+</button>
+                </div>
+            </li>
+        </ul>
+
+        <div id="total">Total: ₹0</div>
+        <button onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <script>
+        const prices = {
+            biryani: 250,
+            paneer: 220,
+            naan: 80,
+            samosa: 50,
+            gulab: 60
+        };
+
+        function increment(item) {
+            const quantityInput = document.getElementById(item + '-quantity');
+            let quantity = parseInt(quantityInput.value);
+            quantity++;
+            quantityInput.value = quantity;
+            updateTotal();
+        }
+
+        function decrement(item) {
+            const quantityInput = document.getElementById(item + '-quantity');
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 0) {
+                quantity--;
+                quantityInput.value = quantity;
+                updateTotal();
+            }
+        }
+
+        function updateTotal() {
+            let total = 0;
+            for (const item in prices) {
+                const quantity = parseInt(document.getElementById(item + '-quantity').value);
+                total += quantity * prices[item];
+            }
+            document.getElementById('total').innerText = 'Total: ₹' + total;
+        }
+
+        function placeOrder() {
+            let total = 0;
+            for (const item in prices) {
+                const quantity = parseInt(document.getElementById(item + '-quantity').value);
+                if (quantity > 0) {
+                    total += quantity * prices[item];
+                }
+            }
+
+            const orderDetails = {
+                total: total
+            };
+
+            // Store the order details in localStorage
+            localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+
+            // Redirect to the next page
+            window.location.href = "order5.html";
+        }
+    </script>
+</body>
+</html>

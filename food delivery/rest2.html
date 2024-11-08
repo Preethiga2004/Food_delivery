@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant List</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        background-color: rgba(250, 250, 250, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 1200px;
+        text-align: center;
+    }
+    h1 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .restaurant-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+    }
+    .restaurant-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        text-align: center;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    .restaurant-card:hover{
+        transform: scale(1.05);
+    }
+    .restaurant-card img {
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .restaurant-card h3 {
+        margin: 10px 0;
+        font-size: 18px;
+        color: #333;
+    }
+    .restaurant-card p {
+        padding: 0 10px 10px;
+        font-size: 14px;
+        color: #666;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>
+<body>
+    <div class="container">
+        <h1>Our Restaurants</h1>
+        <div class="restaurant-gallery">
+            <!-- Pannaiyar Restaurant -->
+            <div class="restaurant-card">
+                <a href="menu1.html">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipPL-Cr_xsvyNsRIC-VmMQBHuRtnzLbZqCp7Hf4d=s1360-w1360-h1020">
+                    <h3>One Fine Day Restaurant</h3>
+                    <p>Fine dining experience.</p>
+                </a>
+            </div>
+            <!-- Brother's Kitchen -->
+            <div class="restaurant-card">
+                <a href="menu2.html">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNZocA8OVBf3VwEIgmlyhjfKqwABidxVWG7_p4f=s1360-w1360-h1020">
+                    <h3>Snacker's Republic </h3>
+                    <p>Multi cuisine restaurant.</p>
+                </a>
+            </div>
+            <!-- Mountain View Diner -->
+            <div class="restaurant-card">
+                <a href="menu3.html">
+                    <img src="https://content.jdmagicbox.com/comp/erode/d6/9999px424.x424.181112130333.w1d6/catalogue/mid-street-erode-ngzomeua7g.jpg">
+                    <h3>Mid Street Restaurant</h3>
+                    <p>Cozy meals with a view.</p>
+                </a>
+            </div>
+            <!-- City Lights Café -->
+            <div class="restaurant-card">
+                <a href="menu4.html">
+                    <img src="https://pbs.twimg.com/media/GHqVCxMW0AE0MXN.jpg:large">
+                    <h3>Erode Food Street</h3>
+                    <p>Urban vibes and great coffee.</p>
+                </a>
+            </div>
+            <!-- The Rustic Spoon -->
+            <div class="restaurant-card">
+                <a href="menu5.html">
+                    <img src="https://content.jdmagicbox.com/comp/coimbatore/w3/0422px422.x422.190606130540.v3w3/catalogue/kokkarakko-biriyani-and-fast-food-coimbatore-2wdskk9jrt.jpg">
+                    <h3>Kokkarako Restaurant</h3>
+                    <p>Comfort food in a rustic setting.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

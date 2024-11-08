@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erode Food Street Menu</title>
+    
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        background-color: rgba(250, 250, 250, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 1200px;
+        text-align: center;
+    }
+    h1 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap; /* Allows items to wrap if they overflow */
+        justify-content: space-around;
+    }
+    ul li {
+        width: 200px; /* Set a fixed width for each item */
+        margin-bottom: 20px;
+        font-size: 18px;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    ul li img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%; /* Make the image circular */
+        margin-bottom: 15px;
+    }
+    .order-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+    .order-controls button {
+        padding: 5px 10px;
+        font-size: 16px;
+    }
+    .order-controls input {
+        width: 40px;
+        text-align: center;
+        margin: 0 10px;
+        font-size: 16px;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Erode Food Street Menu</h1>
+        <ul>
+            <li>
+                <img src="https://vaya.in/recipes/wp-content/uploads/2018/02/Idli-and-Sambar-1.jpg" alt="Idli Sambar">
+                <div>
+                    <p><strong>Idli Sambar</strong> - ₹50</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('idli')">-</button>
+                    <input type="text" id="idli-quantity" value="0" readonly>
+                    <button onclick="increment('idli')">+</button>
+                </div>
+            </li>
+            <li>
+                <img src="https://thumbs.dreamstime.com/b/chicken-dish-garnished-lemon-served-plate-320522220.jpg" alt="Chicken 65">
+                <div>
+                    <p><strong>Chicken 65</strong> - ₹180</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('chicken65')">-</button>
+                    <input type="text" id="chicken65-quantity" value="0" readonly>
+                    <button onclick="increment('chicken65')">+</button>
+                </div>
+            </li>
+            <li>
+                <img src="https://www.shutterstock.com/image-photo/indian-spicy-mutton-biryani-raita-260nw-2175540517.jpg" alt="Mutton Biryani">
+                <div>
+                    <p><strong>Mutton Biryani</strong> - ₹300</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('muttonbiryani')">-</button>
+                    <input type="text" id="muttonbiryani-quantity" value="0" readonly>
+                    <button onclick="increment('muttonbiryani')">+</button>
+                </div>
+            </li>
+            <li>
+                <img src="https://palatesdesire.com/wp-content/uploads/2022/09/Mysore-masala-dosa-recipe@palates-desire.jpg" alt="Masala Dosa">
+                <div>
+                    <p><strong>Masala Dosa</strong> - ₹70</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('dosa')">-</button>
+                    <input type="text" id="dosa-quantity" value="0" readonly>
+                    <button onclick="increment('dosa')">+</button>
+                </div>
+            </li>
+            <li>
+                <img src="https://aartimadan.com/wp-content/uploads/2020/11/milk-powder-gulab-jamuns.jpg" alt="Gulab Jamun">
+                <div>
+                    <p><strong>Gulab Jamun</strong> - ₹40</p>
+                </div>
+                <div class="order-controls">
+                    <button onclick="decrement('jamun')">-</button>
+                    <input type="text" id="jamun-quantity" value="0" readonly>
+                    <button onclick="increment('jamun')">+</button>
+                </div>
+            </li>
+        </ul>
+
+        <div id="total">Total: ₹0</div>
+        <button onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <script>
+        const prices = {
+            idli: 50,
+            chicken65: 180,
+            muttonbiryani: 300,
+            dosa: 70,
+            jamun: 40
+        };
+
+        function increment(item) {
+            const quantityInput = document.getElementById(item + '-quantity');
+            let quantity = parseInt(quantityInput.value);
+            quantity++;
+            quantityInput.value = quantity;
+            updateTotal();
+        }
+
+        function decrement(item) {
+            const quantityInput = document.getElementById(item + '-quantity');
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 0) {
+                quantity--;
+                quantityInput.value = quantity;
+                updateTotal();
+            }
+        }
+
+        function updateTotal() {
+            let total = 0;
+            for (const item in prices) {
+                const quantity = parseInt(document.getElementById(item + '-quantity').value);
+                total += quantity * prices[item];
+            }
+            document.getElementById('total').innerText = 'Total: ₹' + total;
+        }
+
+        function placeOrder() {
+            let total = 0;
+            for (const item in prices) {
+                const quantity = parseInt(document.getElementById(item + '-quantity').value);
+                if (quantity > 0) {
+                    total += quantity * prices[item];
+                }
+            }
+
+            const orderDetails = {
+                total: total
+            };
+
+            // Store the order details in localStorage
+            localStorage.setItem('orderDetails', JSON.stringify(orderDetails));
+
+            // Redirect to the next page
+            window.location.href = "order4.html";
+        }
+    </script>
+</body>
+</html>

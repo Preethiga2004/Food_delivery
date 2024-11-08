@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: rgba(250, 250, 250, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        #total {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+        .success-message {
+            font-size: 24px;
+            color: green;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Summary</h1>
+        <div class="success-message">Order placed successfully!</div>
+        <div id="total"></div>
+        <button onclick="window.location.href='menu2.html'">Go Back to Menu</button>
+    </div>
+
+    <script>
+        // Retrieve the order details from localStorage
+        const orderDetails = JSON.parse(localStorage.getItem('orderDetails'));
+
+        const totalElement = document.getElementById('total');
+
+        // Check if order details exist
+        if (orderDetails) {
+            totalElement.innerText = `Total: $${orderDetails.total}`;
+        } else {
+            totalElement.innerText = 'No items ordered.';
+        }
+    </script>
+</body>
+</html>
